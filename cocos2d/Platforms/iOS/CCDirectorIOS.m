@@ -137,6 +137,10 @@ CGFloat	__ccContentScaleFactor = 1;
 //
 - (void) drawScene
 {
+    if ( [[UIApplication sharedApplication] applicationState] != UIApplicationStateActive ) {
+        return;
+    }
+
 	/* calculate "global" dt */
 	[self calculateDeltaTime];
 
