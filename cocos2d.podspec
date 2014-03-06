@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'cocos2d/**/*.{h,m,c}', 'external/kazmath/src/**/*.{c,h}', 'external/kazmath/include/**/*.{c,h}'
   s.exclude_files = 'external/libpng/pngtest.c', 'external/libpng/example.c'                    
+  s.header_mappings_dir = 'external/kazmath/include'
                     
   s.xcconfig   =  { 'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/cocos2d/external/kazmath/include"' }
   s.frameworks =  ["OpenGLES", "QuartzCore", "GameKit"]
