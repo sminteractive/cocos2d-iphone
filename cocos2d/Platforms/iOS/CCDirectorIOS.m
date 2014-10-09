@@ -484,7 +484,7 @@ float	__ccContentScaleFactor = 1;
 
 #else
 	// setup DisplayLink in main thread
-	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 #endif
 
     isAnimating_ = YES;
