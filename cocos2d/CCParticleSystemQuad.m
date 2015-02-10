@@ -56,6 +56,7 @@
 @interface CCParticleSystemQuad ()
 -(void) initVAO;
 -(BOOL) allocMemory;
+@property (nonatomic) BOOL canRender;
 @end
 
 @implementation CCParticleSystemQuad
@@ -199,6 +200,8 @@
 		glBindVertexArray(0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+        
+        self.canRender = YES;
 
 		CHECK_GL_ERROR_DEBUG();
 	};
@@ -407,6 +410,13 @@
 	glBindBuffer(GL_ARRAY_BUFFER, buffersVBO_[0] );
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(quads_[0])*particleCount, quads_);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+    GLenum e = glGetError();
+    if(e == GL_NO_ERROR) {
+        self.canRender = YES;
+    }
+    else {
+        self.canRender = NO;
+    }
 
 	CHECK_GL_ERROR_DEBUG();
 }
@@ -414,6 +424,9 @@
 // overriding draw method
 -(void) draw
 {
+    if(!self.canRender) {
+        return;
+    }
 	NSAssert(!batchNode_,@"draw should not be called when added to a particleBatchNode");
 
 	CC_NODE_DRAW_SETUP();
